@@ -14,7 +14,7 @@ const imageLoaded = () => {
   numberOfImagesLoaded++;
   if (numberOfImagesLoaded === totalImages) {
     ready = true;
-    console.log(`ready = `, ready);
+    loader.hidden = true;
   }
 };
 
@@ -27,6 +27,7 @@ const setAttribute = (element, attributes) => {
 
 // create image elements and add to DOM
 const displayImages = () => {
+  imageLoaded = 0;
   totalImages = photosArray.length;
   console.log(`totalImages`, totalImages);
 
@@ -67,10 +68,10 @@ const getNewImages = async () => {
 window.addEventListener("scroll", () => {
   if (
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 &&
-    numberOfImagesLoaded >= 10
+    ready
   ) {
     getNewImages();
-    console.log("load more");
+    ready = false;
   }
 });
 
