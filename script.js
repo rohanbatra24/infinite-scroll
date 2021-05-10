@@ -4,9 +4,18 @@ const loader = document.getElementById("loader");
 
 let photosArray = [];
 
+let ready = false;
+let numberOfImagesLoaded = 0;
+let totalImages = 0;
+
 // check if all images have loaded
 const imageLoaded = () => {
   console.log("image loaded");
+  numberOfImagesLoaded++;
+  if (numberOfImagesLoaded === totalImages) {
+    ready = true;
+    console.log(`ready = `, ready);
+  }
 };
 
 // helper function to set attributes on DOM elements
@@ -18,6 +27,9 @@ const setAttribute = (element, attributes) => {
 
 // create image elements and add to DOM
 const displayImages = () => {
+  totalImages = photosArray.length;
+  console.log(`totalImages`, totalImages);
+
   photosArray.forEach((photo) => {
     // create <a> to link to unsplash
     const link = document.createElement("a");
@@ -54,8 +66,8 @@ const getNewImages = async () => {
 
 window.addEventListener("scroll", () => {
   if (
-    window.innerHeight + window.scrollY >=
-    document.body.offsetHeight - 1000
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 &&
+    numberOfImagesLoaded >= 10
   ) {
     getNewImages();
     console.log("load more");
