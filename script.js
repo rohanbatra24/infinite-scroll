@@ -4,6 +4,11 @@ const loader = document.getElementById("loader");
 
 let photosArray = [];
 
+// check if all images have loaded
+const imageLoaded = () => {
+  console.log("image loaded");
+};
+
 // helper function to set attributes on DOM elements
 const setAttribute = (element, attributes) => {
   for (const key in attributes) {
@@ -27,6 +32,8 @@ const displayImages = () => {
       alt: photo.alt_description,
       title: photo.alt_description,
     });
+
+    image.addEventListener("load", imageLoaded);
 
     // put <img> inside <a>, then put both inside imageContainer element
     link.appendChild(image);
