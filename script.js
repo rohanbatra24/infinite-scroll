@@ -30,7 +30,6 @@ const setAttribute = (element, attributes) => {
 
 // create image elements and add to DOM
 const displayImages = () => {
-  imageLoaded = 0;
   totalImages = photosArray.length;
 
   photosArray.forEach((photo) => {
